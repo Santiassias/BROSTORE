@@ -1,0 +1,97 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: linear-gradient(to right, #eef1f7, #f4f6f9);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+}
+
+.form-signin {
+  max-width: 440px;
+  padding: 40px 35px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: none;
+}
+
+.form-signin .form-control {
+  padding: 14px 18px;
+  font-size: 16px;
+  margin-bottom: 22px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-signin .form-control:focus {
+  border-color: #ff5252;
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);
+  outline: none;
+}
+
+#btnSignUp {
+  margin-top: 20px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #fd0d0d, #ff6666);
+  border: none;
+  color: #fff;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+#btnSignUp:hover {
+  background: linear-gradient(to right, #084298, #ff3a3a);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.3);
+}
+
+.message-box {
+  margin-top: 30px;
+}
+
+.alert {
+  padding: 14px 20px;
+  font-size: 15px;
+  border-radius: 8px;
+  display: none;
+  transition: opacity 0.3s ease;
+}
+
+.jumbotron {
+  background: linear-gradient(to right, #d6ecff, #f0f8ff);
+  padding: 60px 40px;
+  border-radius: 20px;
+  margin-top: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.jumbotron h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #003366;
+}
+
+.jumbotron p {
+  font-size: 18px;
+  color: #555;
+}
+
+.footer {
+  margin-top: 80px;
+  padding-top: 25px;
+  font-size: 14px;
+  color: #6c757d;
+  text-align: center;
+  border-top: 1px solid #dee2e6;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.2);
+}

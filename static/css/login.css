@@ -1,0 +1,32 @@
+body {
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.box-area {
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #0062E6;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #004bb5;
+}
+
+a {
+  color: #0062E6;
+}
+
+a:hover {
+  text-decoration: underline;
+}

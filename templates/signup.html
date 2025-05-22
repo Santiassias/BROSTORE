@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BroStore</title>
+
+ 
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/css/signup.css" rel="stylesheet">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <style>
+    .form-signin {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .message-box {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="clearfix">
+      <nav class="pull-right">
+        <ul class="nav nav-pills">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/mostrarLogin">Iniciar sesión</a></li>
+          <li class="active"><a href="#">Inscribirse</a></li>
+        </ul>
+      </nav>
+      <h3 class="text-muted">BroStore</h3>
+    </header>
+
+    <main>
+      <div class="jumbotron text-center">
+        <h1>LA MEJOR MODA</h1>
+        <p>Crear Cuenta</p>
+
+        <form id="signupForm" class="form-signin" aria-label="Formulario de registro">
+          <div class="form-group">
+            <label for="inputName">Nombre completo</label>
+            <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Nombre completo" required autofocus>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail">Correo electrónico</label>
+            <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Correo electrónico" required>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+          </div>
+
+          <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+
+          <div class="message-box">
+            <div id="msg" class="alert" role="alert" style="display: none;"></div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="footer text-center">
+      <p>&copy; Proyecto Flask</p>
+    </footer>
+  </div>
+
+
+  <script>
+    $(document).ready(function () {
+      $('#signupForm').submit(function (e) {
+        e.preventDefault(); 
+
+        const formData = {
+          inputName: $('#inputName').val(),
+          inputEmail: $('#inputEmail').val(),
+          inputPassword: $('#inputPassword').val()
+        };
+
+        $.ajax({
+          url: '/registrarse',
+          type: 'POST',
+          data: formData,
+          success: function (respuesta) {
+            $('#msg').removeClass('alert-danger').addClass('alert-success').text(respuesta.mensaje).show();
+            $('#signupForm')[0].reset(); 
+          },
+          error: function (xhr) {
+            let error = "Error inesperado.";
+            try {
+              const respuesta = JSON.parse(xhr.responseText);
+              error = respuesta.error || error;
+            } catch (_) {}
+            $('#msg').removeClass('alert-success').addClass('alert-danger').text(error).show();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
