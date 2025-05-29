@@ -1,374 +1,729 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fefefe;
-    color: #2c3e50;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
+/*
+ * Archivo: index.css
+ * Descripción: Estilos CSS para la página web BroStore,
+ * implementando un tema oscuro, responsive y efectos visuales.
+ */
+
+/* ==================== 1. Variables CSS (Tema Oscuro) ==================== */
+:root {
+    --primary-red: #E74C3C; /* Rojo de acento */
+    --secondary-blue: #3498DB; /* Azul para botones/enlaces */
+    --dark-bg: #1A1A1A; /* Fondo principal muy oscuro */
+    --darker-elements: #2C2C2C; /* Elementos más oscuros (tarjetas, contenedores) */
+    --darkest-elements: #3A3A3A; /* Elementos aún más oscuros (header, footer) */
+    --white-text: #F8F8F8; /* Color de texto claro */
+    --muted-text: #B0B0B0; /* Texto secundario o tenue */
+    --border-color-dark: rgba(255, 255, 255, 0.1); /* Borde sutil para elementos oscuros */
+
+    --font-family-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-family-serif: Georgia, 'Times New Roman', Times, serif;
+
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 40px;
+
+    --transition-speed: 0.3s;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
 }
 
+/* ==================== 2. Reset Básico y Estilos Globales ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave para anclas */
+}
+
+body {
+    font-family: var(--font-family-sans);
+    line-height: 1.6;
+    color: var(--white-text);
+    background-color: var(--dark-bg);
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el 100% del viewport */
+    display: flex;
+    flex-direction: column; /* Organiza header, main, footer en columna */
+}
+
+a {
+    color: var(--secondary-blue);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--primary-red);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-sans);
+    color: var(--white-text);
+    margin-bottom: var(--spacing-md);
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Contenedor principal para centrar contenido */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 0 var(--spacing-md);
+    width: 100%;
 }
 
-
+/* ==================== 3. Header ==================== */
 .header {
-    padding: 20px 0;
-    border-bottom: 2px solid #e74c3c;
-    margin-bottom: 40px;
+    background-color: var(--darkest-elements);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border-color-dark);
+    position: sticky; /* Fija el header al hacer scroll */
+    top: 0;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra para efecto flotante */
+}
+
+.header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header h3.text-muted {
+.header .text-muted {
+    margin: 0;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #e74c3c;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 0;
+    color: var(--primary-red); /* Color de marca */
 }
 
-nav ul.nav-pills {
-    margin: 0;
-    padding: 0;
+.nav-pills {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: var(--spacing-md);
 }
 
-nav ul.nav-pills li a {
-    color: #2c3e50;
+.nav-pills li a {
+    display: block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    color: var(--white-text);
     font-weight: 600;
-    text-transform: uppercase;
-    padding: 10px 15px;
-    border-radius: 25px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-decoration: none;
-    font-size: 0.9rem;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
-nav ul.nav-pills li.active a,
-nav ul.nav-pills li a:hover {
-    background-color: #e74c3c;
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
+.nav-pills li a:hover {
+    background-color: var(--secondary-blue);
+    color: var(--darkest-elements);
 }
 
+.nav-pills li.active a {
+    background-color: var(--primary-red);
+    color: var(--white-text);
+    font-weight: 700;
+}
 
+/* ==================== 4. Main Content ==================== */
+main {
+    flex-grow: 1; /* Permite que el contenido principal ocupe el espacio restante */
+}
+
+section {
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+section:last-of-type {
+    border-bottom: none; /* Elimina el borde inferior de la última sección */
+}
+
+/* ----- Jumbotron (Inicio) ----- */
 .jumbotron {
-    background: linear-gradient(135deg, #fff5f5, #ffe6e6);
-    padding: 5rem 2rem;
-    border-radius: 12px;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../static/img/hero-bg.jpg') no-repeat center center/cover;
     text-align: center;
-    box-shadow: 0 8px 24px rgba(231, 76, 60, 0.15);
-    margin-bottom: 60px;
-    color: #b03a2e;
+    padding: 100px 0;
+    color: var(--white-text);
 }
 
 .jumbotron h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 20px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .jumbotron .lead {
     font-size: 1.5rem;
-    margin-bottom: 30px;
-    font-weight: 500;
-    color: #9e2b1e;
+    margin-bottom: var(--spacing-lg);
+    color: var(--muted-text);
 }
 
-.jumbotron .btn-success {
-    background-color: #e74c3c;
-    border: none;
-    padding: 1rem 2.5rem;
+.btn-success {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-red);
+    color: var(--white-text);
+    border-radius: 50px; /* Botón más redondeado */
     font-size: 1.2rem;
     font-weight: 700;
-    border-radius: 50px;
-    text-transform: uppercase;
-    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    color: white;
-    display: inline-block;
-    text-decoration: none;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.jumbotron .btn-success:hover {
-    background-color: #c0392b;
-    box-shadow: 0 8px 24px rgba(192, 57, 43, 0.6);
-    transform: translateY(-3px);
+.btn-success:hover {
+    background-color: #C0392B; /* Rojo más oscuro al hover */
+    transform: translateY(-3px); /* Pequeño efecto de elevación */
 }
 
-.jumbotron .btn-success:active {
-    transform: translateY(0);
-    box-shadow: none;
-}
-
-
-#MODAS {
-    background: linear-gradient(135deg, #f7f9fc, #eaf2f8);
-    padding: 70px 15px 100px;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-}
-
+/* ----- Sección de Productos (MODAS) ----- */
 #MODAS h2 {
-    font-size: 3rem;
-    font-weight: 800;
-    color: #34495e;
-    margin-bottom: 60px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .MODAS {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Grid responsivo */
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
 .producto {
-  background-color: white;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(52, 73, 94, 0.1);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    background-color: var(--darker-elements);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Para que el input y precio estén abajo */
+    border: 1px solid var(--border-color-dark);
 }
 
 .producto:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(52, 73, 94, 0.15);
+    transform: translateY(-5px); /* Efecto de levitación */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .producto img {
-  width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+    max-width: 100%;
+    height: 250px; /* Altura fija para uniformidad */
+    object-fit: cover; /* Recorta la imagen para ajustarse */
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
 }
 
 .producto h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin: 15px 0 10px;
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-red);
 }
 
 .producto p {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #e74c3c;
-  margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--secondary-blue);
+    margin-bottom: var(--spacing-sm);
 }
 
-input[type="number"] {
-  width: 90px;
-  padding: 10px;
-  font-size: 1.1rem;
-  border: 2px solid #d1d8e0;
-  border-radius: 12px;
-  margin-top: 10px;
-  transition: border-color 0.3s ease;
-  text-align: center;
+.producto input[type="number"] {
+    width: 80px;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color-dark);
+    border-radius: var(--border-radius-md);
+    background-color: var(--dark-bg);
+    color: var(--white-text);
+    text-align: center;
+    -moz-appearance: textfield; /* Para Firefox */
+    appearance: textfield; /* Quita flechas por defecto */
 }
 
-input[type="number"]:focus {
-  outline: none;
-  border-color: #e74c3c;
-  box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+.producto input[type="number"]::-webkit-outer-spin-button,
+.producto input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
+/* ----- Total Container ----- */
 #total-container {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  flex-wrap: wrap;
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--darker-elements);
+    border-radius: var(--border-radius-lg);
+    margin-top: var(--spacing-lg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color-dark);
 }
 
 #calcularTotal {
-  background-color: #e74c3c;
-  color: white;
-  padding: 15px 40px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 12px 25px;
+    background-color: var(--secondary-blue);
+    color: var(--white-text);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    margin-bottom: var(--spacing-sm);
 }
 
 #calcularTotal:hover {
-  background-color: #c0392b;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(192, 57, 43, 0.7);
-}
-
-#calcularTotal:active {
-  transform: translateY(0);
-  box-shadow: none;
+    background-color: #2980B9;
+    transform: translateY(-2px);
 }
 
 #total-container p {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #2c3e50;
-  animation: fadeIn 0.5s ease-in;
-  margin: 0;
-  min-width: 180px;
-  text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white-text);
+    margin: 0;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* ----- Sales Counter Container ----- */
+#sales-counter-container {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--darkest-elements);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--border-color-dark);
 }
 
+#sales-counter-container p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white-text);
+    margin: 0;
+}
 
+#sales-count {
+    color: var(--primary-red);
+    font-weight: 900;
+    font-size: 1.8rem;
+}
+
+/* ----- Marketing Section (Row Marketing - Si decides re-incluirla) ----- */
+/*
 .row.marketing {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 50px 20px;
-  background-color: #fff5f5;
-  max-width: 1200px;
-    margin: 0 auto 80px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: var(--spacing-lg) 0;
 }
 
-.col-lg-6 {
-    flex: 1 1 50%;
-    padding: 30px 30px;
-    box-sizing: border-box;
+.row.marketing .col-lg-6 {
+    flex: 1;
+    min-width: 300px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
 }
 
 .row.marketing h4 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #e74c3c;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    position: relative;
-}
-
-.row.marketing h4::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: #c0392b;
-    margin-top: 8px;
-    border-radius: 2px;
+    font-size: 1.6rem;
+    color: var(--primary-red);
+    margin-bottom: var(--spacing-sm);
 }
 
 .row.marketing p {
-    font-size: 1.1rem;
-    color: #34495e;
-    line-height: 1.7;
-    margin-bottom: 35px;
-    font-weight: 500;
+    color: var(--muted-text);
 }
+*/
 
-.row.marketing h4:hover {
-    color: #c0392b;
-    transition: color 0.3s ease;
-}
-
-
-.footer {
-    background-color: #2c3e50;
-    color: #fff;
+/* ----- Testimonial Section ----- */
+.testimonial-section {
     text-align: center;
-    padding: 25px 15px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-top: 3px solid #e74c3c;
+    background-color: var(--darker-elements);
+    padding: var(--spacing-lg) 0;
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-lg) auto; /* Centrar la sección completa */
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color-dark);
 }
 
-
-@media (max-width: 992px) {
-.header {
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-nav ul.nav-pills {
-    gap: 15px;
-    margin-top: 15px;
-}
-
-#MODAS h2 {
+.testimonial-section h2 {
     font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--white-text);
 }
 
-.MODAS {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
+.testimonial-card {
+    background-color: var(--darkest-elements);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color-dark);
 }
 
-.producto img {
-    max-height: 180px;
+.testimonial-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: var(--spacing-md);
+    border: 4px solid var(--primary-red); /* Borde para el avatar */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-.producto h3 {
+.testimonial-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--white-text);
+    margin-bottom: var(--spacing-md);
+}
+
+.testimonial-author {
+    font-weight: 600;
+    color: var(--secondary-blue);
+    font-size: 1rem;
+}
+
+/* ----- Fashion Tips Section ----- */
+.fashion-tips h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.tips-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.tip {
+    background-color: var(--darker-elements);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color-dark);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.tip:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tip h3 {
+    font-size: 1.5rem;
+    color: var(--primary-red);
+    margin-bottom: var(--spacing-sm);
+}
+
+.tip p {
+    color: var(--muted-text);
+}
+
+/* ----- Map Section ----- */
+.map-section {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+}
+
+.map-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.map-embed {
+    background-color: var(--darker-elements);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden; /* Asegura que el iframe no se desborde */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color-dark);
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    height: 500px; /* Altura fija para el mapa */
+}
+
+.map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block; /* Elimina espacio extra debajo del iframe */
+}
+
+/* ----- Contact Section ----- */
+.contact-section {
+    background-color: var(--darkest-elements);
+    color: var(--white-text);
+    padding: var(--spacing-lg) 0;
+    text-align: center; /* Centra el título y el contenedor de contacto */
+}
+
+.contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--white-text);
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center; /* Centra el contenido en pantallas grandes */
+    align-items: center;
+    flex-wrap: wrap; /* Permite que el contenido se ajuste */
+    padding: var(--spacing-md);
+    background-color: var(--darker-elements);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color-dark);
+    max-width: 600px; /* Ancho máximo para el card de contacto */
+    margin: 0 auto;
+}
+
+.contact-info {
+    text-align: left;
+    margin: var(--spacing-md);
+}
+
+.contact-info h3 {
+    font-size: 1.8rem;
+    color: var(--primary-red);
+    margin-bottom: var(--spacing-md);
+}
+
+.contact-info p {
+    margin-bottom: var(--spacing-sm);
+    color: var(--muted-text);
+    display: flex;
+    align-items: center;
+}
+
+.contact-info p i {
+    margin-right: var(--spacing-sm);
+    color: var(--secondary-blue);
     font-size: 1.2rem;
 }
 
-.producto p {
-    font-size: 1.1rem;
+.contact-info a {
+    color: var(--white-text); /* Asegura que el email sea blanco */
+    text-decoration: underline;
 }
 
-#calcularTotal {
-    padding: 12px 35px;
-    font-size: 1.1rem;
+.social-icons {
+    margin-top: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center; /* Centra los iconos */
 }
 
-#total-container p {
-    font-size: 1.4rem;
-    min-width: auto;
-}
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--secondary-blue);
+    color: var(--white-text);
+    font-size: 1.5rem;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
 }
 
-@media (max-width: 576px) {
+.social-icons a:hover {
+    background-color: var(--primary-red);
+    transform: scale(1.1);
+}
+
+/* ==================== 5. Rating Section ==================== */
+.rating-section {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+    background-color: var(--darker-elements);
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-lg) auto; /* Centrar la sección */
+    max-width: 700px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color-dark);
+}
+
+.rating-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--white-text);
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem; /* Tamaño de las estrellas */
+    gap: 5px; /* Espacio entre estrellas */
+    margin-bottom: var(--spacing-md);
+}
+
+.star {
+    color: var(--muted-text); /* Color por defecto (gris) */
+    cursor: pointer;
+    transition: color var(--transition-speed) ease, transform 0.1s ease;
+}
+
+/* Estilo para las estrellas al pasar el mouse por encima */
+.star.hovered {
+    color: gold; /* Color dorado */
+    transform: scale(1.1); /* Pequeño aumento */
+}
+
+/* Estilo para las estrellas seleccionadas */
+.star.selected {
+    color: gold; /* Color dorado */
+}
+
+.thanks-message {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--secondary-blue);
+    margin-top: var(--spacing-md);
+}
+
+/* ==================== 6. Footer ==================== */
+.footer {
+    background-color: var(--darkest-elements);
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    color: var(--muted-text);
+    border-top: 1px solid var(--border-color-dark);
+    margin-top: auto; /* Empuja el footer al final de la página */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ==================== 7. Media Queries (Responsiveness) ==================== */
+
+/* Para pantallas más pequeñas (tablets y móviles) */
+@media (max-width: 768px) {
+    :root {
+        --spacing-md: 15px; /* Ajustar espaciado */
+        --spacing-lg: 30px;
+    }
+
+    .header .container {
+        flex-direction: column; /* Apila el título y la navegación */
+        text-align: center;
+    }
+
+    .nav-pills {
+        flex-direction: column; /* Apila los enlaces de navegación */
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-md);
+    }
+
+    .nav-pills li a {
+        padding: var(--spacing-sm);
+    }
+
+    .jumbotron h1 {
+        font-size: 2.5rem;
+    }
+
+    .jumbotron .lead {
+        font-size: 1.2rem;
+    }
+
+    .btn-success {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
     .MODAS {
-    grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+
+    /* Si se re-incluye .row.marketing */
+    /*
+    .row.marketing .col-lg-6 {
+        min-width: 100%;
+        padding: var(--spacing-sm);
+    }
+    */
+
+    .testimonial-card,
+    .contact-container,
+    .rating-section {
+        padding: var(--spacing-md);
+    }
+
+    .testimonial-section h2,
+    .fashion-tips h2,
+    .map-section h2,
+    .contact-section h2,
+    .rating-section h2 {
+        font-size: 2rem;
+    }
+
+    .testimonial-text {
+        font-size: 1rem;
+    }
+
+    .tips-container {
+        grid-template-columns: 1fr; /* Una columna para los consejos */
+    }
+
+    .contact-info {
+        text-align: center; /* Centrar información de contacto en móviles */
+    }
+
+    .contact-info p {
+        justify-content: center; /* Centrar iconos y texto en móviles */
+    }
+
+    .social-icons {
+        justify-content: center; /* Asegurar que los iconos estén centrados */
+    }
+
+    .map-embed {
+        height: 300px; /* Altura más pequeña para el mapa en móviles */
+    }
+
+    .star-rating {
+        font-size: 2.5rem; /* Estrellas un poco más pequeñas */
+    }
 }
 
-nav ul.nav-pills {
-    flex-direction: column;
-    gap: 10px;
-}
+/* Para pantallas muy pequeñas (smartphones) */
+@media (max-width: 480px) {
+    .header .text-muted {
+        font-size: 1.5rem;
+    }
 
-.row.marketing {
-    flex-direction: column;
-    padding: 30px 15px;
-}
+    .jumbotron h1 {
+        font-size: 2rem;
+    }
 
-.col-lg-6 {
-    flex: 1 1 100%;
-    padding: 20px 10px;
-}
-}
+    .jumbotron .lead {
+        font-size: 1rem;
+    }
 
+    .producto h3 {
+        font-size: 1.2rem;
+    }
+
+    .producto p {
+        font-size: 1rem;
+    }
+
+    #total-container p {
+        font-size: 1.5rem;
+    }
+
+    #sales-counter-container p {
+        font-size: 1.2rem;
+    }
+
+    #sales-count {
+        font-size: 1.5rem;
+    }
+}

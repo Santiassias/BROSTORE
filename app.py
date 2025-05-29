@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
-from config import Configuracion  # Configuración externa
+from config import Configuracion  
 
 app = Flask(__name__)
 app.config.from_object(Configuracion)
