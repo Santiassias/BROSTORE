@@ -137,6 +137,31 @@
                     <button id="calcularTotal">Calcular Total</button>
                     <p>Total: $0</p>
                 </div>
+                <script>
+document.getElementById("calcularTotal").addEventListener("click", function () {
+    const productos = document.querySelectorAll(".producto");
+    let total = 0;
+
+    productos.forEach(producto => {
+        const precioTexto = producto.querySelector("p").textContent;
+        const cantidad = parseInt(producto.querySelector("input").value);
+        
+        // Elimina el símbolo $ y los puntos para convertir a número
+        const precio = parseInt(precioTexto.replace("$", "").replace(/\./g, ""));
+        
+        if (!isNaN(cantidad)) {
+            total += precio * cantidad;
+        }
+    });
+
+    // Formatear el total con separador de miles
+    const totalFormateado = total.toLocaleString("es-CO");
+
+    // Mostrar el total en el párrafo dentro de #total-container
+    document.querySelector("#total-container p").textContent = `Total: $${totalFormateado}`;
+});
+</script>
+
                 <div id="sales-counter-container">
                     <p>Ventas Realizadas: <span id="sales-count">0</span></p>
                 </div>
